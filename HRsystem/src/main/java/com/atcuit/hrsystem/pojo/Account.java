@@ -17,6 +17,7 @@ public class Account {
 	}
 
 	public Integer getAccountNum() {
+		System.out.println("getAccountNum");
 		return accountNum;
 	}
 
