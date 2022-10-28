@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>主页</title>
+    <link rel="stylesheet" th:href="@{/static/css/BOSS-HRHome.css}">
+</head>
+
+<body>
+    <div class="main" id="app">
+        <div th:include="head/BOSS-HRHead :: common-header"></div>
+
+
+        <div id="welcome">
+        </div>
+        <span id="welcomeWord" th:text="'欢迎回来，' + ${session.userName}"></span>
+
+        
+        <div id="paper">
+            <img th:src="@{/static/imgs/paper.png}" alt="">
+        </div>
+        
+        <button id="jurisdiction" @click="toJurisdiction()">权限管理</button>
+    </div>
+
+    <script type="text/javascript" th:src="@{/static/js/vue.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/axios.min.js}"></script>
+    
+    <script>
+        new Vue({
+            el: "#app",
+            methods: {
+                option_show() {
+                    if (document.getElementById("option").style.display == 'none') {
+                        document.getElementById("option").style.display = '';
+                    } else {
+                        document.getElementById("option").style.display = 'none';
+                    }
+                },
+                toJurisdiction(){
+                	// location.href="../jurisdiction/jurisdictionHome.html"
+                },
+                personDetail(accountNum){
+                	// location.href="../extra/personDetail.html?id=" +accountNum
+                }
+            }
+        }
+        )
+    </script>
+</body>
+
+</html>

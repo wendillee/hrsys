@@ -1,0 +1,101 @@
+@charset "UTF-8";
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.main {
+    position: relative;
+    margin: 0 auto;
+    width: 1778px;
+    height: 1006px;
+    background-image: url(../imgs/login_pswreset.png);
+    background-repeat: no-repeat;
+}
+
+.main .block {
+    position: relative;
+    top: 215px;
+    left: 920px;
+    width: 700px;
+    height: 500px;
+    background-color: rgba(242, 242, 242, .8);
+    border-radius: 25px;
+}
+
+.main .block h1 {
+    position: absolute;
+    top: 35px;
+    right: 67px;
+    width: 600px;
+    font-size: 30px;
+    color: rgb(70, 70, 70);
+}
+
+.main .block .imgs {
+    position: relative;
+    top: 134px;
+    right: -94px;
+}
+
+.main .block span {
+    display: block;
+    position: relative;
+    top: 146px;
+    left: 33px;
+    width: 130px;
+    margin-bottom: 23px;
+    font-size: 25px;
+    text-align: center;
+}
+
+.main .block input {
+    position: relative;
+    top: 76px;
+    right: -169px;
+    font-size: 28px;
+    height: 50px;
+    width: 450px;
+    margin-bottom: 25px;
+}
+
+#submit {
+    position: relative;
+    top: 180px;
+    left: -211px;
+    width: 200px;
+    height: 60px;
+    border-radius: 30px;
+    border-color: pink;
+    background-color: #81D3F8;
+
+}
+
+.main .block #pswnoteq {
+    color: red;
+    font-size: 20px;
+    position: absolute;
+    top: 324px;
+    left: 411px;
+}
+
+.main .block #pswerr {
+    color: red;
+    font-size: 20px;
+    position: absolute;
+    top: 184px;
+    left: 411px;
+}
+
+.main .block img {
+    width: 50px;
+}
+
+
+.main .block #note {
+    color: rgb(80, 97, 102);
+    font-size: 20px;
+    position: absolute;
+    top: 197px;
+    left: 172px;
+}

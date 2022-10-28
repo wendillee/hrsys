@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../css/DH-STHome.css">
+</head>
+
+<body>
+    <div class="main" id="app">
+        <div class="function">
+            <ul>
+                <li id="f7"><a href="#" id="opa"><img id="opa" src="../../imgs/option.png" width="60px"
+                            @click="option_show()"></a></li>
+                <li id="f6" @click="personDetail(localAccount.accountNum)">
+                        <div>
+                            <img src="../../imgs/person.png" width="60px">
+                            <div>{{localAccount.userName}}</div>
+                        </div>
+                </li>
+                <li id="f5"><a href="../extra/DHStaff.html">部门员工查询</a></li>
+            </ul>
+        </div>
+
+        <div id="welcome"></div>
+        <span id="welcomeWord">欢迎回来，{{localAccount.userName}}</span>
+
+
+        <div id="option" style="display:none;">
+            <ul>
+                <li><a href="../login/login.html">退出登录</a></li>
+            </ul>
+        </div>
+
+        <ul id="buttons">
+            <li><a href="../extra/DHStaff.html">部门员工查询</a></li>
+        </ul>
+	</div>
+    <script src="../../js/axios-0.18.0.js"></script>
+    <script src="../../js/vue.js"></script>
+        <script>
+            new Vue({
+                el: "#app",
+                data() {
+                    return {
+                    	localAccount:{}
+                    }
+                },
+                mounted(){
+        			var _this = this;
+        			axios({
+        				method:"post",
+        				url:"http://localhost:8080/HRMSystem-demo/AccountGetServlet",
+        			}).then(function(resp){
+    					_this.localAccount = resp.data;
+        			})
+        		},
+                methods: {
+                    option_show() {
+                        if (document.getElementById("option").style.display == 'none') {
+                            document.getElementById("option").style.display = '';
+                        } else {
+                            document.getElementById("option").style.display = 'none';
+                        }
+                    },
+                    personDetail(accountNum){
+                    	location.href="../extra/personDetail.html?id=" +accountNum
+                    }
+                }
+            }
+            )
+        </script>
+</body>
+
+</html>

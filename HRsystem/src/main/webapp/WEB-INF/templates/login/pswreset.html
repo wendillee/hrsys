@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/static/css/pswreset.css}">
+</head>
+
+<body>
+    <div class="main" id="app">
+        <form class="block" method="post" th:action="@{/login/pswreset}" @submit="submitForm">
+            <h1 th:text="'账号 '+ ${accountNum} + ', 请设置新密码'"></h1>
+            <div id="note">*请设置8-20位的密码</div>
+            <div id="pswerr" style="display: none">*密码必须为8-20位</div>
+            <div id="pswnoteq" style="display:none">*两次输入的密码不一致</div>
+            <span>输入新密码</span><input type="password" v-model="password1" @blur="check()"><br>
+            <input type="hidden" name="accountNum" th:value="${accountNum}">
+            <span>确认密码</span><input type="password" v-model="password2" @blur="equals()" name="password">
+            <input type="submit" id="submit" value="确认">
+        </form>
+    </div>
+</body>
+
+
+<script type="text/javascript" th:src="@{/static/js/vue.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/axios.min.js}"></script>
+	
+	<script>
+	new Vue({
+		el:"#app",
+		data(){
+			return{
+				password1:"",
+				password2:""
+			}
+		},
+		methods:{
+			submitForm(e){
+				if(!this.check() || !this.equals()){
+                    e.preventDefault();
+				}
+			},
+			
+			check(){
+				var _this = this;
+				var reg = /^\w{8,20}$/
+				var flag = reg.test(_this.password1);
+				if(!flag){
+					document.getElementById("note").style.display="none";
+					document.getElementById("pswerr").style.display="block";
+				}else{
+					document.getElementById("pswerr").style.display="none";
+				}
+				return flag;
+			},
+			
+			equals(){
+				var _this = this;
+				var flag = _this.password1 == _this.password2;
+				if(!flag){
+					document.getElementById("pswnoteq").style.display="block";
+				}else {
+					document.getElementById("pswnoteq").style.display="none";
+				}
+				return flag;
+			}
+		}
+	})
+	
+	</script>
+</html>

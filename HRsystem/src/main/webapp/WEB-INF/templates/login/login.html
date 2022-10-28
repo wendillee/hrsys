@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/static/css/login.css}">
+</head>
+
+<body>
+    <div class="main" id="app">
+        <div class="block">
+            <h1>用户登录</h1>
+            <img th:src="@{/static/imgs/account.png}" class="imgs"><input type="text" v-model="account.accountNum"><br>
+            <img th:src="@{/static/imgs/password.png}" class="imgs"><input type="password" v-model="account.password">
+            <div id="notfound" style="display: none">*用户名不存在</div>
+            <div id="noname" style="display: none">*用户名不能为空</div>
+            <div id="err" style="display: none">*用户名或密码错误</div>
+            <div id="nopsw" style="display: none">*密码不能为空</div>
+            <input type="button" value="登录" id="submit" @click="submitForm()" @keydown.enter="handleWatchEnter">
+            <span>*注：账号即为工号</span>
+        </div>
+    </div>
+
+
+    <script type="text/javascript" th:src="@{/static/js/vue.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/axios.min.js}"></script>
+
+	<script>
+        new Vue({
+            el:"#app",
+            data(){
+                return{
+                    account:{},
+                }
+            },
+            mounted() {
+                const that = this;
+                document.addEventListener('keydown', that.handleWatchEnter);
+            },
+            methods:{
+
+                submitForm(){
+                    var _this = this;
+
+                    document.getElementById("noname").style.display="none";
+                    document.getElementById("nopsw").style.display="none";
+                    document.getElementById("err").style.display="none";
+                    document.getElementById("notfound").style.display="none";
+                    //验证输入是否为空
+                    if(!_this.account.accountNum){
+                        document.getElementById("noname").style.display="block";
+                        return;
+                    }
+
+                    if(!_this.account.password ){
+                        document.getElementById("nopsw").style.display="block";
+                        return;
+                    }
+                    axios({
+                        method:"post",
+                        url:"/HRsystem/login",
+                        data:_this.account
+                    }).then(function(resp){
+                        var flag = resp.data;
+                        alert(flag);
+                        if(flag == "2"){
+                            //密码错误
+                            document.getElementById("err").style.display="block";
+                        }else if(flag == "3") {
+                            //不存在用户
+                            document.getElementById("notfound").style.display = "block";
+                        }else if(flag == "4") {
+                            //首次登陆
+                            location.href="/HRsystem/login/topswreset/" + _this.account.accountNum;
+                        }else if(flag == "11") {
+                            location.href="/HRsystem/toBOSSHome/" + _this.account.accountNum;
+                        }
+                        _this.account.password = '';
+                    })
+                },
+
+                handleWatchEnter(e) {
+                    var key = window.event ? e.keyCode : e.which;
+                    if (key === 13) {
+                        this.submitForm();
+                    }
+                }
+
+            }
+        })
+
+    </script>
+	
+</body>
+</html>

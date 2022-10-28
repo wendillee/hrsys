@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="common-header">
+    <div class="function">
+        <img id="toHome" th:src="@{/static/imgs/home.png}" width="60px" @click="toHome">
+        <ul>
+            <li id="f7"><a href="#" id="opa"><img th:src="@{/static/imgs/option.png}" width="60px"
+                                                  @click="option_show()"></a></li>
+            <li id="f6" @click="personDetail(localAccount.accountNum)">
+                <div>
+                    <img th:src="@{/static/imgs/person.png}" width="60px">
+                    <div th:text="${session.userName}"></div>
+                </div>
+            </li>
+            <li id="f5"><a href="../statistics/StatisticHome.html">汇总统计</a></li>
+            <li id="f4"><a th:href="@{/staff/page/1}">人员管理</a></li>
+            <li id="f3"><a href="../title/titleHome.html">职称管理</a></li>
+            <li id="f2"><a href="../post/postHome.html">岗位管理</a></li>
+            <li id="f1"><a href="../organization/organizationHome.html">组织机构管理</a></li>
+        </ul>
+    </div>
+
+    <div id="option" style="display:none ;">
+        <ul>
+            <li><a href="../login/login.html">退出登录</a></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

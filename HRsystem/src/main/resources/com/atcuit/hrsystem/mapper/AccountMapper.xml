@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atcuit.hrsystem.mapper.AccountMapper">
+
+<!--    Account getAccountByAccountNum(@Param("accountNum") Integer accountNum);-->
+    <select id="getAccountByAccountNum" resultType="Account">
+        select * from t_account where account_num = #{accountNum}
+    </select>
+
+<!--    void passwordReset(Account account);-->
+    <update id="passwordReset">
+        update t_account set password=#{password}, logged=1 where account_num = #{accountNum}
+    </update>
+
+<!--        String getUserNameByAccountNum(@Param("accountNum") Integer accountNum);-->
+    <select id="getUserNameByAccountNum" resultType="String">
+        select emp_name from t_staff where emp_id = #{accountNum}
+    </select>
+</mapper>

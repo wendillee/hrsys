@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atcuit.hrsystem.mapper.StaffMapper">
+<!--    List<Staff> getAllStaff();-->
+    <select id="getAllStaff" resultType="Staff">
+        select * from t_staff
+    </select>
+
+<!--            void deleteStaffByEmpId(@Param("empId") Integer empId);-->
+    <delete id="deleteStaffByEmpId">
+        delete from t_staff where emp_id = #{empId}
+    </delete>
+</mapper>
