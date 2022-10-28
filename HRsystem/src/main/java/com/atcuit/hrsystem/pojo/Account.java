@@ -22,6 +22,7 @@ public class Account {
 	}
 
 	public void setAccountNum(Integer accountNum) {
+		System.out.println("setAccountNum");
 		this.accountNum = accountNum;
 	}
 
